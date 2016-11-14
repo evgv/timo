@@ -54,21 +54,84 @@ Download and add in head section or where you included javascript scripts into y
 ##### Some CSS styles for modal windows
 
 ```css
+			.modal-noscroll {
+				position: fixed;
+				overflow: hidden;
+			}
 
-    .modal-window {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        background: #ffffff;
-        opacity: 0; // Need for example with animation
-        width: 300px;
-        height: 400px;
-        margin-top: -200px;
-        margin-left: -150px;
-        z-index: 5;
-        padding: 20px 10px;
-    }
+			.modal-window {
+		        display: none;
+		        position: fixed;
+		        top: 45%;
+		        left: 50%;
+		        background: #ffffff;
+		        opacity: 0;
+			    width: 500px;
+			    height: 400px;
+			    margin-top: -200px;
+			    margin-left: -250px;
+			    border: 1px solid #000;
+		        z-index: 101;
+		        padding: 25px 35px;
+				-webkit-box-sizing: border-box;
+			    -moz-box-sizing: border-box;
+			    box-sizing: border-box;
+		    }
+
+			.modal-window .modal-close {
+			    position: absolute;
+			    top: 10px;
+			    right: 10px;
+			    width: 20px;
+			    height: 20px;
+			    cursor: pointer;
+			    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjMDEwMTAxIiBwb2ludHM9Ijc3LjYsMjEuMSA0OS42LDQ5LjIgMjEuNSwyMS4xIDE5LjYsMjMgNDcuNiw1MS4xIDE5LjYsNzkuMiAyMS41LDgxLjEgNDkuNiw1MyA3Ny42LDgxLjEgNzkuNiw3OS4yICAgNTEuNSw1MS4xIDc5LjYsMjMgIi8+PC9zdmc+);
+			}
+
+		    .modal-window .modal-title {
+	    	    position: relative;
+			    margin-bottom: 40px;
+			    padding-bottom: 15px;
+			    font-family: "MillerBannerSemibold", "Arial", sans-serif;
+			    font-size: 32px;
+			    text-align: center;
+			    letter-spacing: 1px;
+			    color: #000000;
+		    }
+
+		    .modal-window .modal-subtitle {
+	    	    margin-bottom: 30px;
+			    font-family: "BrandonMed", "Arial", sans-serif;
+			    font-size: 16px;
+			    line-height: 16px;
+			    text-align: center;
+			    text-transform: uppercase;
+			    color: #000000;
+		    }
+
+		    .modal-window .modal-content {
+	    	    font-family: "Georgia", "Arial", sans-serif;
+			    font-size: 14px;
+			    line-height: 20px;
+			    text-align: center;
+
+		    }
+
+		    #overlay {
+				display: none;
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			    background-color: #fff;
+			    filter: alpha(opacity=80);
+			    -moz-opacity: 0.8;
+			    opacity: 0.8;
+			    cursor: pointer;
+			    z-index: 100;
+			}
+
 
 ```
 
@@ -78,28 +141,31 @@ Two links with different params open one modal window
 
 ```html
 
-    <a href="##" data-timoLIdent="general-ca" data-timoEvent="click" data-timoPrevent="true" data-timoSelector="#general-ca-modal">Open by click</a>
+		<a href="##" data-timoLIdent="general-ca-hover" data-timoEvent="mouseenter">Open by hover</a>
 
-    <a href="##" data-timoEvent="mouseenter" data-timoSelector="#general-ca">Open by hover</a>
+		<div class="modal-window" data-timoMIdent="general-ca-hover">
+			<div class="modal-close"></div>
+			<div class="modal-title">Lorem Ipsum title</div>
+			<div class="modal-subtitle">Lorem Ipsum subtitle</div>
+			<div class="modal-content">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</div>
+		</div>
 
-```
+	
+		<br>
 
-```html
 
-    <div id="general-ca" class="modal-window" data-timoMIdent="general-ca">
+		<a href="/" data-timoLIdent="general-ca-click" data-timoEvent="click" data-timoPrevent="true">Open by click</a>
 
-        <div class="modal-window-wrapper">
-
-            <div class="title">Modal window title</div>
-            <div class="subtitle">Modal window subtitle</div>
-
-            <div class="content">
-                <p>Some modal window content</p>
-            </div>
-
-        </div>
-
-    </div>
+		<div class="modal-window" data-timoMIdent="general-ca-click">
+			<div class="modal-close"></div>
+			<div class="modal-title">Lorem Ipsum title</div>
+			<div class="modal-subtitle">Lorem Ipsum subtitle</div>
+			<div class="modal-content">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</div>
+		</div>
 
 ```
 
