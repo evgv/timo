@@ -82,6 +82,9 @@ Two links with different params open one modal window
 
     <a href="##" data-timoEvent="mouseenter" data-timoSelector="#general-ca">Login</a>
 
+```
+
+```html
 
     <div id="general-ca" class="modal-window" data-timoMIdent="general-ca">
 
@@ -113,6 +116,9 @@ $(document).ready(function(){
         fadeOut: 300,
     });
 });
+```
+
+```js
 
 /**
  * Initialize with animation
