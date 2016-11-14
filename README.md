@@ -78,9 +78,9 @@ Two links with different params open one modal window
 
 ```html
 
-    <a href="##" data-timoLIdent="general-ca" data-timoEvent="click" data-timoPrevent="true" data-timoSelector="#general-ca-modal">Login</a>
+    <a href="##" data-timoLIdent="general-ca" data-timoEvent="click" data-timoPrevent="true" data-timoSelector="#general-ca-modal">Open by click</a>
 
-    <a href="##" data-timoEvent="mouseenter" data-timoSelector="#general-ca">Login</a>
+    <a href="##" data-timoEvent="mouseenter" data-timoSelector="#general-ca">Open by hover</a>
 
 ```
 
