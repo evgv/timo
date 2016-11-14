@@ -11,15 +11,15 @@ Small client-side javascript library that makes managing your modal windows easy
 - [RFC6265](http://www.rfc-editor.org/rfc/rfc6265.txt) compliant
 - Cross browser (test now)
 - Lightweight
-- Few versions (jQuery, PrototypeJs, Pure javascript) just noew only for jQuery
+- Few versions (jQuery, PrototypeJs, Pure javascript) just now only for jQuery
 
 ## Browser Compatibility
 The following browsers have passed all of the automated Cookies.js tests:
 - Chrome
-- Firefox (test new)
-- Safari (test new)
-- Opera (test new)
-- Internet Explorer (test new)
+- Firefox (test now)
+- Safari (test now)
+- Opera (test now)
+- Internet Explorer (test now)
 
 ## Getting the Library
 #### Direct downloads
@@ -33,9 +33,25 @@ First release contain only jQuery version, so you must add to your site or web a
 
 Download and add in head section or where you included javascript scripts into your site or web application `timo.jquery.js` (later will be added versions for PrototypeJs and pure javascript without any dependencies) by direct links or another comfortable ways for you.
 
+**Options for links:**
+
+| Option                | Description                                                                  |
+| --------------------: | ---------------------------------------------------------------------------- |
+| *data-timoLIdent*     | `required`, `unique` if you do not use *data-timoSelector*, and must be the same as a *data-timoMIdent* of depend modal window |
+| *data-timoEvent*      | `required`, any of `jQuery` `.on()` event type `click`, `mouseenter` etc. |
+| *data-timoPrevent*    | `optional`, prevent link action |
+| *data-timoSelector*   | `optional`, substitute for *data-timoLIdent*, any `jQuery` valid query selector |
+
+**Options for modal windows:**
+
+| Option                | Description                                                                  |
+| --------------------: | ---------------------------------------------------------------------------- |
+| *data-timoMIdent*     | `required`, `unique` if you used *data-timoLIdentr* for depend link and must be the same as this param|
+
+
 #### For example
 
-###### Some CSS styles for modal windows
+##### Some CSS styles for modal windows
 
 ```css
 
@@ -56,24 +72,7 @@ Download and add in head section or where you included javascript scripts into y
 
 ```
 
-###### Html markup
-
-**Options for links:**
-
-| Option                | Description                                                                  | Default      |
-| --------------------: | ---------------------------------------------------------------------------- | ------------ |
-| *data-timoLIdent*     | Required if you do not use *data-timoSelector*, and must be the same as a *data-timoMIdent* of depend modal window, must be unique |              |
-| *data-timoEvent*      | Required, any of `jQuery` `.on()` event type `click`, `mouseenter` etc.        | `click`      |
-| *data-timoPrevent*    | Optional, prevent link action                                                | `true` for `click` event type and `false` for others |
-| *data-timoSelector*   | Optional, substitute for *data-timoLIdent*, any `jQuery` valid query selector                                   |      |
-| *secure*              | A boolean value of whether or not the cookie should only be available over SSL  (deprecated)       | `false`     |
-
-**Options for modal windows:**
-
-| Option                | Description                                                                  | Default      |
-| --------------------: | ---------------------------------------------------------------------------- | ------------ |
-| *data-timoMIdent*     | Required if you do use *data-timoLIdentr* for depend link and must be the same as this param, must be unique |              |
-
+##### Html markup
 
 Two links with different params open one modal window
 
@@ -99,7 +98,9 @@ Two links with different params open one modal window
 
     </div>
 
-    ```
+```
+
+##### Js initialize
 
 ```js
 
@@ -136,6 +137,5 @@ $(document).ready(function(){
         }
     }, false);
 });
-
 
 ```
