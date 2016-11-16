@@ -7,16 +7,16 @@ module.exports = function(grunt) {
             dist: {
                 src: [
                     'src/lib/*.js',
-                    'src/stage/timo.jquery.js'
+                    'src/stage/js/timo.jquery.js'
                 ],
-                dest: 'src/build/timo.jquery.js',
+                dest: 'src/build/js/timo.jquery.js',
             }
         },
 
         uglify: {
             build: {
-                src: 'src/build/timo.jquery.js',
-                dest: 'src/build/timo.jquery.min.js'
+                src: 'src/build/js/timo.jquery.js',
+                dest: 'src/build/js/timo.jquery.min.js'
             }
         },
 

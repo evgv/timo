@@ -2,10 +2,20 @@
 <html>
 
 	<head>
+  		<meta charset="utf-8">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  		<title>timoJs examples</title>
+  		<meta name="description" content="">
+
+		<!-- jQuery CDN -->
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 
-		<script src="timo.jquery.js"></script>
-		
+		<!-- Comppressed build of timoJs -->
+		<!-- <script src="../build/js/timo.jquery.min.js"></script> -->
+		<script src="../stage/js/timo.jquery.js"></script>
 	</head>
 
 	<body>
@@ -97,9 +107,9 @@
 		</style>
 
 
-		<a href="##" data-timoLIdent="general-ca-hover" data-timoEvent="mouseenter">Open by hover</a>
+		<a href="##" data-timoLIdent="general-ca-mouseenter" data-timoEvent="mouseenter">Open by mouseenter</a>
 
-		<div class="modal-window" data-timoMIdent="general-ca-hover">
+		<div class="modal-window" data-timoMIdent="general-ca-mouseenter">
 			<div class="modal-close"></div>
 			<div class="modal-title">Lorem Ipsum title</div>
 			<div class="modal-subtitle">Lorem Ipsum subtitle</div>
@@ -108,11 +118,11 @@
 			</div>
 		</div>
 
-	
+		<br>
+		<br>
 		<br>
 
-
-		<a href="/" data-timoLIdent="general-ca-click" data-timoEvent="click" data-timoPrevent="true">Open by click</a>
+		<a href="##" data-timoLIdent="general-ca-click" data-timoEvent="click" data-timoPrevent="true">Open by click</a>
 
 		<div class="modal-window" data-timoMIdent="general-ca-click">
 			<div class="modal-close"></div>
@@ -122,6 +132,9 @@
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 			</div>
 		</div>
+
+
+
 
 
 		<script type="text/javascript">

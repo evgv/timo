@@ -215,7 +215,7 @@
                 var self    = this,
                     body    = $('body');
 
-                body.on('click', '#modal_close, #overlay',function() {
+                body.on('click', '.modal-close, #overlay',function() {
 
                     try {
                         var modal = $('[data-timoMIdent]');
@@ -261,7 +261,7 @@
          */
         timo.initialize = function(options, debug) {
 
-            var self = this;
+            var self = new timo();
 
             if(typeof options !== 'object') {
                 return;
