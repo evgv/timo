@@ -1,9 +1,9 @@
 /**
- * timo v0.0.1
+ * timo v0.0.2
  * timo
  * https://github.com/evgv/timo
  *
- * Copyright 2016 Zubkov Eugene
+ * Copyright 2017 Zubkov Eugene
  * Released under the MIT
  */
 
@@ -48,8 +48,6 @@
          */
         var timo = function() {
 
-            // Add private variables
-
             /**
              * Debug logs
              *
@@ -58,7 +56,7 @@
             this.debug = false;
 
             /**
-             * TODO
+             * @TODO
              *
              * Not realized yet
              * Add type of modal window
@@ -80,77 +78,41 @@
              * @param {number|string} fadeOut
              */
             this.fadeOut = 400;
-
+            
             /**
-             * Animate object
-             *
-             * Param enabled true|false by default false
-             *
-             * Object `show` and `hide` set or rewrite all params
-             * from jQuery animate http://api.jquery.com/animate/ object
-             *
-             * Structure:
-             *
-             *  animate = {
-             *      enabled: true|false,
-             *      show: {
-             *          properties: {
-             *              duration : 400,
-             *              easing   : swing,
-             *              complete : function(){}
-             *          },
-             *          options: {
-             *              duration: 400,
-             *              easing: swing,
-             *              queue: true,
-             *              specialEasing: {
-             *                  ...
-             *              }
-             *
-             *              ...
-             *          }
-             *      }
-             *      hide: {
-             *          properties: {
-             *              ...
-             *          },
-             *          options: {
-             *              ...
-             *          }
-             *      }
-             *  }
-             *
-             *  `show' used for fade in modal window
-             *  `hide' used for fade out modal window
-             *
-             * @param {object} animate
+             * timo.overaly object
              */
-            this.animate = {
-                enabled    : false,
-                show: {
-                  properties : {},
-                  options    : {}
-                },
-                hide: {
-                  properties : {},
-                  options    : {}
-                }
-            };
-
-            // Add private methods
+            this.overlay = {};
+            
+            
+            /**
+             * @TODO
+             * 
+             * No scroll for body if moadl window is active
+             */
+//            this.noscroll = false;
 
             /**
-             * Create and add to <body> new element '<div id="overlay"></div>'
+             * Create and add to <body> new element '<div id="timo-overlay"></div>' if not exist
              *
              * @returns {undefined}
              */
-            this._overlay = function() {
-
+            this._overlay = function(modal) {
+                
                 var self    = this,
                     body    = $('body');
 
-                var overlay = $('<div id="overlay"></div>');
-                    overlay.appendTo(body);
+                body.find('#timo-overlay').remove();
+                
+                self.overlay = $('<div id="timo-overlay"></div>');
+                
+                if(typeof modal !== 'undefined') {
+                    self.overlay.insertAfter(modal);
+                } else {
+                    self.overlay.appendTo(body);
+                }
+                
+                self.overlay.fadeIn(self.fadeIn);
             };
 
             /**
@@ -177,28 +139,9 @@
                 }
 
                 try {
-
-                    self._overlay();
-
-                    if(self.animate.enabled) {
-                        $('#overlay').fadeIn(
-                            self.fadeIn,
-                            function() {
-                                modal
-                                    .css('display', 'block')
-                                    .animate(
-                                        self.animate.show.options,
-                                        self.animate.show.properties
-                                    );
-                            }
-                        );
-                    } else {
-                        $('#overlay').fadeIn(self.fadeIn);
-
-                        modal.show(self.fadeIn, function() {
-                            modal.css('opacity', '1');
-                        });
-                    }
+                    modal.fadeIn(self.fadeIn);
+                    self._overlay(modal); // with object add overlay after this object, without add into end of body
+                    
                 } catch (e) {
                     console.warn(e);
                 }
@@ -215,34 +158,15 @@
                 var self    = this,
                     body    = $('body');
 
-                body.on('click', '.modal-close, #overlay',function() {
+                body.on('click', '.modal-close, #timo-overlay',function() {
 
                     try {
                         var modal = $('[data-timoMIdent]');
 
-                        if(self.animate.enabled) {
-
-                            $('#overlay').fadeOut(
-                                self.fadeOut,
-                                function() {
-                                    modal
-                                        .css('display', 'none')
-                                        .animate(
-                                            self.animate.hide.options,
-                                            self.animate.hide.properties
-                                        );
-                                }
-                            );
-
-                        } else {
-                            modal.hide(self.fadeOut, function() {
-                                modal.css('opacity', '0');
-                            });
-
-                            $('#overlay').fadeOut(self.fadeOut, function() {
-                                $('#overlay').remove();
-                            });
-                        }
+                        self.overlay.fadeOut(self.fadeOut, function() {
+                            self.overlay.remove();
+                        });
+                        modal.fadeOut(self.fadeOut);
 
                     } catch (e) {
                         console.warn(e);
@@ -268,16 +192,21 @@
             }
 
             self.debug = debug;
+            
+            if(self.debug) {
+                console.group('debug');
+                console.time('Initialization time took');
+            }
 
             for (var key in options){
                 if (options.hasOwnProperty(key) && self.hasOwnProperty(key)) {
                     self[key] = options[key];
-
-                    if(self.debug) {
-                        console.info('timoJs initialized with following options');
-                        console.info(options);
-                    }
                 }
+            }
+            
+            if(self.debug) {
+                console.info('%c timoJs initialized with following options', 'background: #000; color: #ffff00');
+                console.info(options);
             }
 
             /**
@@ -312,13 +241,16 @@
 
             self._hide();
 
-            console.info('%c timoJs plugin is successful initialized! enjoy it;)', 'background: #000; color: #ffff00');
-
+            if(self.debug) {
+                console.timeEnd('Initialization time took');
+                console.info('%c timoJs plugin is successful initialized! enjoy it;)', 'background: #000; color: #ffff00');
+                console.groupEnd();
+            }
         };
 
 
         /**
-         * Return main insance
+         * Return main instance
          */
         return timo;
 
