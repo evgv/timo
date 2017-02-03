@@ -1,5 +1,5 @@
 /**
- * timo v0.0.2
+ * timo v0.0.3
  * timo
  * https://github.com/evgv/timo
  *
@@ -17,12 +17,12 @@
  */
 (function (global, undefined) {
 
-    'use strict';
+    "use strict";
 
     /**
      * Factory method
      *
-     * @throws {Error}  timo.js requires a `window` with a `document` object'
+     * @throws {Error}  timo.js requires a `window` with a `document` object"
      * @param  {object} window
      */
     var factory = function (window) {
@@ -30,15 +30,15 @@
         /**
          * Check window object is exist
          */
-        if (typeof window.document !== 'object') {
-            throw new Error('timo.jquery.js requires a `window` with a `document` object');
+        if (typeof window.document !== "object") {
+            throw new Error("timo.jquery.js requires a `window` with a `document` object");
         }
 
         /**
          * Check jQuery object is exist
          */
         if(!window.jQuery) {
-            throw new Error('timo.jquery.js requires a `jQuery`, timo.js this plugin without jQuery');
+            throw new Error("timo.jquery.js requires a `jQuery`, timo.js this plugin without jQuery");
         } else {
           $ = window.jQuery;
         }
@@ -61,7 +61,7 @@
              * Not realized yet
              * Add type of modal window
              */
-            this.type = '';
+            this.type = "";
 
             /**
              * jQuery fadeIn speed
@@ -93,20 +93,20 @@
 //            this.noscroll = false;
 
             /**
-             * Create and add to <body> new element '<div id="timo-overlay"></div>' if not exist
+             * Create and add to <body> new element "<div id="timo-overlay"></div>" if not exist
              *
              * @returns {undefined}
              */
             this._overlay = function(modal) {
                 
                 var self    = this,
-                    body    = $('body');
+                    body    = $("body");
 
-                body.find('#timo-overlay').remove();
+                body.find("#timo-overlay").remove();
                 
-                self.overlay = $('<div id="timo-overlay"></div>');
+                self.overlay = $("<div id=\"timo-overlay\"></div>");
                 
-                if(typeof modal !== 'undefined') {
+                if(typeof modal !== "undefined") {
                     self.overlay.insertAfter(modal);
                 } else {
                     self.overlay.appendTo(body);
@@ -116,31 +116,36 @@
             };
 
             /**
-             * Initilaze event for show(fade in) modal window by query selector or data identifier
+             * Initilaze event for show(fade in) modal window 
+             * by query selector (highest priority) or data identifier (by default)
              *
              * @returns {undefined}
              */
             this._show = function(ident, selector) {
 
                 var self = this,
-                    body = $('body');
+                    body = $("body");
 
                 if(
-                    typeof ident === 'undefined' &&
-                    typeof selector === 'undefined'
+                    typeof ident === "undefined" &&
+                    typeof selector === "undefined"
                 ) {
                     return;
                 }
 
+                var modal = false;
+                
                 if(ident) {
-                    var modal = body.find('[data-timoMIdent="' + ident + '"]');
+                    var modal = body.find("[data-timoMIdent=\"" + ident + "\"]");
                 } else if(selector) {
                     var modal = body.find(selector);
                 }
 
                 try {
-                    modal.fadeIn(self.fadeIn);
-                    self._overlay(modal); // with object add overlay after this object, without add into end of body
+                    if(modal) {
+                        modal.fadeIn(self.fadeIn);
+                        self._overlay(modal); // with object add overlay after this object, without add into end of body
+                    }
                     
                 } catch (e) {
                     console.warn(e);
@@ -156,12 +161,12 @@
             this._hide = function() {
 
                 var self    = this,
-                    body    = $('body');
+                    body    = $("body");
 
-                body.on('click', '.modal-close, #timo-overlay',function() {
+                body.on("click", ".modal-close, #timo-overlay",function() {
 
                     try {
-                        var modal = $('[data-timoMIdent]');
+                        var modal = $("[data-timoMIdent]");
 
                         self.overlay.fadeOut(self.fadeOut, function() {
                             self.overlay.remove();
@@ -187,15 +192,15 @@
 
             var self = new timo();
 
-            if(typeof options !== 'object') {
+            if(typeof options !== "object") {
                 return;
             }
 
             self.debug = debug;
             
             if(self.debug) {
-                console.group('debug');
-                console.time('Initialization time took');
+                console.group("debug");
+                console.time("Initialization time took");
             }
 
             for (var key in options){
@@ -205,7 +210,7 @@
             }
             
             if(self.debug) {
-                console.info('%c timoJs initialized with following options', 'background: #000; color: #ffff00');
+                console.info("%c timoJs initialized with following options", "background: #000; color: #ffff00");
                 console.info(options);
             }
 
@@ -219,18 +224,18 @@
              *
              * @type object
              */
-            var openModalLinks = $('[data-timoLIdent]');
+            var openModalLinks = $("[data-timoLIdent]");
 
             $.each(openModalLinks, function(i, item, openModalLinks) {
 
                 var el       = $(this),
-                    body     = $('body'),
-                    event    = el.data('timoevent'),
-                    ident    = el.data('timolident'),
-                    prevent  = el.data('timoprevent'),
-                    selector = el.data('timoselector');
+                    body     = $("body"),
+                    event    = el.data("timoevent"),
+                    ident    = el.data("timolident"),
+                    prevent  = el.data("timoprevent"),
+                    selector = el.data("timoselector");
 
-                    body.on(event, '[data-timoLIdent="' + ident + '"]', function(e) {
+                    body.on(event, "[data-timoLIdent=\"" + ident + "\"]", function(e) {
                         if(prevent) {
                             e.preventDefault();
                         }
@@ -242,8 +247,8 @@
             self._hide();
 
             if(self.debug) {
-                console.timeEnd('Initialization time took');
-                console.info('%c timoJs plugin is successful initialized! enjoy it;)', 'background: #000; color: #ffff00');
+                console.timeEnd("Initialization time took");
+                console.info("%c timoJs plugin is successful initialized! enjoy it;)", "background: #000; color: #ffff00");
                 console.groupEnd();
             }
         };
@@ -259,13 +264,13 @@
     /**
      * Create timo instance
      */
-    var timoExport = typeof global.document === 'object' ? factory(global) : factory;
+    var timoExport = typeof global.document === "object" ? factory(global) : factory;
 
 
     /**
      * AMD support
      */
-    if (typeof define === 'function' && define.amd) {
+    if (typeof define === "function" && define.amd) {
 
         define(function () {
             return timoExport;
@@ -274,12 +279,12 @@
     /**
      * CommonJS / Node.js support
      */
-    } else if (typeof exports === 'object') {
+    } else if (typeof exports === "object") {
 
        /**
         * Support Node.js specific `module.exports` (which can be a function)
         */
-        if (typeof module === 'object' && typeof module.exports === 'object') {
+        if (typeof module === "object" && typeof module.exports === "object") {
             exports = module.exports = timoExport;
         }
 
@@ -296,4 +301,4 @@
         global.timo = timoExport;
     }
 
-})(typeof window === 'undefined' ? this : window);
+})(typeof window === "undefined" ? this : window);
